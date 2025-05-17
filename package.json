@@ -1,0 +1,43 @@
+{
+  "name": "@resms/sdk",
+  "version": "0.4.3",
+  "publishConfig": {
+    "access": "public"
+  },
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --format esm,cjs --dts",
+    "lint": "biome lint .",
+    "format": "biome format . --write",
+    "check-format": "biome format . --check",
+    "test": "vitest run"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "description": "Node.js library for ReSMS API",
+  "type": "module",
+  "devDependencies": {
+    "@biomejs/biome": "^1.9.4",
+    "tsup": "^8.5.0",
+    "typescript": "^5.8.3",
+    "vitest": "^3.1.3"
+  },
+  "directories": {
+    "test": "test"
+  }
+}
