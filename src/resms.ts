@@ -1,37 +1,64 @@
-export interface SendParams {
-    to: string;
-    message: string;
-}
+import { ReSMSError } from "./error";
+import type { ErrorResponse } from "./response";
+import { Sms } from "./sms/sms";
 
-export interface SendResult {
-    id: string;
-    status: 'queued' | 'sent' | 'failed';
-}
+const baseUrl = "https://api.resms.dev";
 
 export class ReSMS {
-    #apiKey: string;
-    #base = 'https://api.resms.dev';
+  private readonly headers: Headers;
 
-    constructor(apiKey: string) {
-        if (!apiKey) throw new Error('ReSMS: api key is required');
-        this.#apiKey = apiKey;
+  readonly sms = new Sms(this);
+
+  constructor(readonly key: string) {
+    this.headers = new Headers({
+      "X-Api-Key": this.key,
+      "Content-Type": "application/json",
+    });
+  }
+
+  async fetchRequest<T>(path: string, options = {}): Promise<T> {
+    const response = await fetch(`${baseUrl}${path}`, options);
+    return await this.handleResponse<T>(response);
+  }
+
+  private async handleResponse<T>(response: Response): Promise<T> {
+    if (!response.ok) {
+      const errorResponse = (await response.json()) as ErrorResponse;
+      throw new ReSMSError(
+        errorResponse.error.name,
+        errorResponse.error.message,
+      );
     }
 
-    async send(params: SendParams): Promise<SendResult> {
-        const res = await fetch(`${this.#base}/sms/send`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-api-key': this.#apiKey,
-            },
-            body: JSON.stringify(params),
-        });
+    return (await response.json()) as Promise<T>;
+  }
 
-        if (!res.ok) {
-            const body = await res.text();
-            throw new Error(`ReSMS: ${res.status} ${res.statusText}\n${body}`);
-        }
+  async get<T>(path: string) {
+    const requestOptions = {
+      method: "GET",
+      headers: this.headers,
+    };
 
-        return res.json();
-    }
+    return this.fetchRequest<T>(path, requestOptions);
+  }
+
+  async post<T>(path: string, payload?: unknown) {
+    const requestOptions = {
+      method: "POST",
+      headers: this.headers,
+      body: JSON.stringify(payload),
+    };
+
+    return this.fetchRequest<T>(path, requestOptions);
+  }
+
+  async delete<T>(path: string, payload?: unknown) {
+    const requestOptions = {
+      method: "DELETE",
+      headers: this.headers,
+      body: JSON.stringify(payload),
+    };
+
+    return this.fetchRequest<T>(path, requestOptions);
+  }
 }
