@@ -17,7 +17,7 @@ export class ReSMS {
     });
   }
 
-  async fetchRequest(path: string, options = {}): Promise<ReSMSResponse> {
+  async fetchRequest(path: string, options = {}) {
     const response = await fetch(`${baseUrl}${path}`, options);
     return await this.handleResponse(response);
   }
