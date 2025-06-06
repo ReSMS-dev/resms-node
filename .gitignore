@@ -18,6 +18,9 @@ pnpm-debug.log*
 # VS Code
 .vscode/
 
+# Idea
+.idea/
+
 # Test coverage
 coverage/
 .nyc_output/

@@ -7,11 +7,20 @@
 	},
 	"files": {
 		"ignoreUnknown": false,
-		"ignore": []
+		"ignore": [
+			".next",
+			"node_modules",
+			"dist",
+			"build",
+			"coverage",
+			"**/*.log",
+			"**/*.lock",
+			"**/*.d.ts"
+		]
 	},
 	"formatter": {
 		"enabled": true,
-		"indentStyle": "tab"
+		"indentStyle": "space"
 	},
 	"organizeImports": {
 		"enabled": true
@@ -19,7 +28,25 @@
 	"linter": {
 		"enabled": true,
 		"rules": {
-			"recommended": true
+			"recommended": true,
+			"a11y": {
+				"noLabelWithoutControl": "off",
+				"noSvgWithoutTitle": "off",
+				"useKeyWithClickEvents": "off"
+			},
+			"complexity": {
+				"noForEach": "off"
+			},
+			"correctness": {
+				"useExhaustiveDependencies": "off",
+				"noUnusedImports": "warn",
+				"noUnusedVariables": "warn"
+			},
+			"style": {
+				"noInferrableTypes": "off",
+				"noNonNullAssertion": "warn",
+				"noUnusedTemplateLiteral": "warn"
+			}
 		}
 	},
 	"javascript": {
