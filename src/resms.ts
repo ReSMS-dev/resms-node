@@ -1,7 +1,7 @@
 import { ReSMSError } from "./error";
-import type { ErrorResponse } from "./response";
+import { Otp } from "./otp/otp";
 import { Sms } from "./sms/sms";
-import type { ReSMSResponse } from "./type";
+import type { ErrorResponse, ReSMSResponse } from "./type";
 
 const baseUrl = "https://api.resms.dev";
 
@@ -9,6 +9,7 @@ export class ReSMS {
   private readonly headers: Headers;
 
   readonly sms = new Sms(this);
+  readonly otp = new Otp(this);
 
   constructor(readonly key: string) {
     this.headers = new Headers({
