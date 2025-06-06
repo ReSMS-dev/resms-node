@@ -33,7 +33,7 @@ console.log(response);
 
 ## Documentation
 
-The full documentation is available at [resms.dev/docs](https://resms.dev/docs).
+The full documentation is available at [https://docs.resms.dev](https://docs.resms.dev/).
 
 ## License
 
