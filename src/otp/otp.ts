@@ -1,6 +1,5 @@
 import type { ReSMS } from "../resms";
 import type { CreateOtpOptions, CreateOtpResponse } from "./model/create-otp";
-import type { DeleteOtpOptions, DeleteOtpResponse } from "./model/delete-otp";
 import type { VerifyOtpOptions, VerifyOtpResponse } from "./model/verify-otp";
 
 export class Otp {
@@ -18,12 +17,5 @@ export class Otp {
       "/otp/verify",
       verifyOtpOptions,
     )) as VerifyOtpResponse;
-  }
-
-  async delete(deleteOtpOptions: DeleteOtpOptions): Promise<DeleteOtpResponse> {
-    return (await this.resms.delete(
-      "/otp",
-      deleteOtpOptions,
-    )) as DeleteOtpResponse;
   }
 }
