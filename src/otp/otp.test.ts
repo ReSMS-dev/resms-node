@@ -13,10 +13,10 @@ const mockResms = {
 const otp = new Otp(mockResms);
 
 describe("Otp SDK", () => {
-  it("should create an OTP", async () => {
+  it("should send an OTP", async () => {
     mockPost.mockResolvedValue({ otpId: "abc123" });
 
-    const res = await otp.create({
+    const res = await otp.send({
       to: "+33612345678",
       message: "Your code is {CODE}",
     });

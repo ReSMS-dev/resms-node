@@ -1,4 +1,4 @@
-export type CreateOtpOptions = {
+export type SendOtpOptions = {
   to: string;
   message: `${string}{CODE}${string}`;
   senderId?: string;
@@ -7,7 +7,7 @@ export type CreateOtpOptions = {
   validityMinutes?: number;
 };
 
-export type CreateOtpResponse = {
+export type SendOtpResponse = {
   data: {
     phoneNumber: string;
     expiresAt: string;
