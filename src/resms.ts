@@ -53,14 +53,4 @@ export class ReSMS {
 
     return this.fetchRequest(path, requestOptions);
   }
-
-  async delete(path: string, payload?: unknown) {
-    const requestOptions = {
-      method: "DELETE",
-      headers: this.headers,
-      body: JSON.stringify(payload),
-    };
-
-    return this.fetchRequest(path, requestOptions);
-  }
 }
