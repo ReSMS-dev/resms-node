@@ -1,15 +1,12 @@
 import type { ReSMS } from "../resms";
-import type { CreateOtpOptions, CreateOtpResponse } from "./model/create-otp";
+import type { SendOtpOptions, SendOtpResponse } from "./model/send-otp";
 import type { VerifyOtpOptions, VerifyOtpResponse } from "./model/verify-otp";
 
 export class Otp {
   constructor(private readonly resms: ReSMS) {}
 
-  async create(createOtpOptions: CreateOtpOptions): Promise<CreateOtpResponse> {
-    return (await this.resms.post(
-      "/otp",
-      createOtpOptions,
-    )) as CreateOtpResponse;
+  async send(sendOtpOptions: SendOtpOptions): Promise<SendOtpResponse> {
+    return (await this.resms.post("/otp", sendOtpOptions)) as SendOtpResponse;
   }
 
   async verify(verifyOtpOptions: VerifyOtpOptions): Promise<VerifyOtpResponse> {
