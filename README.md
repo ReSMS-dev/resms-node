@@ -35,6 +35,8 @@ console.log(response);
 
 The full documentation is available at [https://docs.resms.dev](https://docs.resms.dev/).
 
+Here is an implementation example of ReSMS Java package: https://github.com/ReSMS-dev/resms-node-example
+
 ## License
 
 This project is licensed under the MIT License.
